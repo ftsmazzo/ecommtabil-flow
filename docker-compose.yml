@@ -1,0 +1,27 @@
+# Ambiente completo com Docker (app + PostgreSQL). Uso: docker compose up -d
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ecommflow
+      POSTGRES_USER: ecommflow
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?defina DB_PASSWORD no .env}
+      TZ: America/Sao_Paulo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ecommflow"]
+      interval: 10s
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db: { condition: service_healthy }
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://ecommflow:${DB_PASSWORD}@db:5432/ecommflow
+    ports:
+      - "127.0.0.1:3000:3000"
+volumes:
+  pgdata:

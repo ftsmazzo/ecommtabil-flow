@@ -1,0 +1,38 @@
+{
+  "name": "ecommtabil-flow",
+  "version": "1.0.0",
+  "private": true,
+  "description": "EcommFlow / Ecommtabil — gestão de tarefas e rotinas (FábricaIA)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start -p ${PORT:-3000}",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "db:setup": "tsx scripts/db-setup.ts",
+    "bootstrap:admin": "tsx scripts/bootstrap-admin.ts",
+    "senha": "tsx scripts/senha.ts",
+    "cron": "tsx scripts/cron.ts"
+  },
+  "dependencies": {
+    "jose": "5.9.6",
+    "next": "14.2.15",
+    "pdfjs-dist": "3.11.174",
+    "pg": "8.13.0",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "server-only": "^0.0.1",
+    "zod": "3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "20.16.11",
+    "@types/pg": "8.11.10",
+    "@types/react": "18.3.11",
+    "@types/react-dom": "18.3.1",
+    "tsx": "4.19.1",
+    "typescript": "5.6.3"
+  }
+}
